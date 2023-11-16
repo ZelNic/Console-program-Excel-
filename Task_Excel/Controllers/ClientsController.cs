@@ -67,6 +67,7 @@ namespace Task_Excel.Controllers
 
                 if (result.Any())
                 {
+                    Console.ForegroundColor = ConsoleColor.Green;
                     Console.WriteLine();
                     Console.WriteLine("Результат запроса:");
 
@@ -83,18 +84,24 @@ namespace Task_Excel.Controllers
                     }
                     Console.WriteLine(new string('-', 57));
                     Console.WriteLine();
+                    Console.ForegroundColor = ConsoleColor.Yellow;
                 }
                 else
                 {
+                    Console.ForegroundColor = ConsoleColor.Blue;
                     Console.WriteLine("Нет результата.");
+                    Console.ForegroundColor = ConsoleColor.Yellow;
                     Thread.Sleep(1000);
                     Console.Clear();
                 }
             }
             catch
             {
+                Console.ForegroundColor = ConsoleColor.Blue;
                 Console.WriteLine("Нет результата.");
+                Console.ForegroundColor = ConsoleColor.Yellow;
                 Thread.Sleep(1000);
+                Console.Clear();
             }
         }
 
@@ -125,7 +132,7 @@ namespace Task_Excel.Controllers
 
         }
 
-        public Сlient GetGoldenСlient(UnitOfWork unitOfWork, int year, int month)
+        public void GetGoldenСlient(UnitOfWork unitOfWork, int year, int month)
         {
             Dictionary<int, int> customerOrderCounts = new Dictionary<int, int>();
 
@@ -158,10 +165,23 @@ namespace Task_Excel.Controllers
 
             if (goldenCustomer != 0)
             {
-                return unitOfWork.Сlients.FirstOrDefault(o => o.ClientСode == goldenCustomer);
-            }
+               var сlient = unitOfWork.Сlients.FirstOrDefault(o => o.ClientСode == goldenCustomer);
 
-            return null;
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine(new string('-', 57));
+                Console.WriteLine("Золотой клиент: " + сlient.NameCompany);
+                Console.WriteLine(new string('-', 57));
+                Console.ForegroundColor = ConsoleColor.Yellow;
+            }
+            else
+            {
+                Console.ForegroundColor = ConsoleColor.Blue;
+                Console.WriteLine(new string('-', 57));
+                Console.WriteLine("Золотой клиент не найден.");
+                Console.WriteLine(new string('-', 57));
+                Console.ForegroundColor = ConsoleColor.Yellow;
+               
+            }
         }
     }
 }

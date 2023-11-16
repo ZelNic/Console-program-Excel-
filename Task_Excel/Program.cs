@@ -40,13 +40,16 @@ public class Program
     public static string SendStartMessage()
     {
         string numberOperation = "";
-        Console.WriteLine("Здравствуйте, уважаемый пользователь");
+        Console.ForegroundColor = ConsoleColor.Green;
+        Console.WriteLine("Здравствуйте, уважаемый пользователь!");
         Console.WriteLine("Данная программа позволяет взаимодействовать с таблицами Excel определенного формата.");
+        Console.WriteLine(new string('-', 86));
 
+        Console.ForegroundColor = ConsoleColor.White;
         Console.WriteLine("\nИспользовать закрепленную таблицу или новую таблицу?");
         Console.WriteLine("\n1. Закрепленная таблица.");
         Console.WriteLine("2. Новая таблицы.\n");
-
+        Console.ForegroundColor = ConsoleColor.Yellow;
 
         return numberOperation = Console.ReadLine();
     }
@@ -66,7 +69,7 @@ public class Program
 
                 string[] numbers = new string[3];
                 numbers[0] = Console.ReadLine();
-                Console.WriteLine("Введите номер таблицы Продуктов.");
+                Console.WriteLine("Введите номер таблицы Товаров.");
                 numbers[1] = Console.ReadLine();
                 Console.WriteLine("Введите номер таблицы Заявок.");
                 numbers[2] = Console.ReadLine();
@@ -79,13 +82,17 @@ public class Program
                 }
                 catch
                 {
+                    Console.ForegroundColor = ConsoleColor.Red;
                     Console.WriteLine("Неверный формат введенных данных");
+                    Console.ForegroundColor = ConsoleColor.Yellow;
                     Restart();
                 }
 
                 break;
             default:
+                Console.ForegroundColor = ConsoleColor.Blue;
                 Console.WriteLine("Такой операции нет. Перезагрузка программы...");
+                Console.ForegroundColor = ConsoleColor.Yellow;
                 Thread.Sleep(1000);
                 Console.Clear();
                 Restart();
@@ -100,9 +107,10 @@ public class Program
     }
     public static void Menu(ClientsController clientsController, UnitOfWork unitOfWork, ApplicationData data)
     {
+        Console.ForegroundColor = ConsoleColor.White;
         Console.WriteLine("Выберите команду:\n1. Вывести информацию о клиентах, заказавших товар\n" +
             "2. Изменить контактное лицо клиента\n3. Определить золотого клиента за указанный год и месяц\n4. Выход\n");
-
+        Console.ForegroundColor = ConsoleColor.Yellow;
 
         string command = Console.ReadLine();
 
@@ -116,16 +124,34 @@ public class Program
                 break;
             case "2":
                 Console.WriteLine();
+
                 foreach (var client in unitOfWork.Сlients)
                 {
                     Console.WriteLine($"Название компании: {client.NameCompany}");
                 }
+
                 Console.WriteLine("\nВведите название организации клиента:");
                 string organizationName = Console.ReadLine();
                 Console.WriteLine("\nВведите ФИО нового контактного лица:\n");
                 string newContactPerson = Console.ReadLine();
+
                 bool success = clientsController.ChangeContactPerson(data, unitOfWork, organizationName, newContactPerson);
-                Console.WriteLine(success ? "Изменения сохранены." : "Ошибка.");
+                if (success)
+                {
+                    Console.ForegroundColor = ConsoleColor.Green;
+                    Console.WriteLine(new string('-', 57));
+                    Console.WriteLine("Изменения сохранены.");
+                    Console.WriteLine(new string('-', 57));
+                    Console.ForegroundColor = ConsoleColor.Yellow;
+                }
+                else
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine(new string('-', 57));
+                    Console.WriteLine("Ошибка.");
+                    Console.WriteLine(new string('-', 57));
+                    Console.ForegroundColor = ConsoleColor.Yellow;
+                }
                 СontinueAndClear();
                 break;
             case "3":
@@ -133,21 +159,8 @@ public class Program
                 int year = int.Parse(Console.ReadLine());
                 Console.WriteLine("\nВведите месяц:");
                 int month = int.Parse(Console.ReadLine());
-                Сlient goldenСlient = clientsController.GetGoldenСlient(unitOfWork, year, month);
-                if (goldenСlient != null)
-                {
-                    Console.WriteLine(new string('-', 57));
-                    Console.WriteLine("Золотой клиент: " + goldenСlient.NameCompany);
-                    Console.WriteLine(new string('-', 57));
-                    СontinueAndClear();
-                }
-                else
-                {
-                    Console.WriteLine(new string('-', 57));
-                    Console.WriteLine("Золотой клиент не найден.");
-                    Console.WriteLine(new string('-', 57));
-                    СontinueAndClear();
-                }
+                clientsController.GetGoldenСlient(unitOfWork, year, month);
+                СontinueAndClear();
                 break;
             case "4":
                 data.isOpen = false;

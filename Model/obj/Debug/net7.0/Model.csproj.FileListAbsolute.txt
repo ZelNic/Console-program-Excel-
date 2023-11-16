@@ -1,0 +1,12 @@
+F:\GitHub\Task_Excel\Model\bin\Debug\net7.0\Model.deps.json
+F:\GitHub\Task_Excel\Model\bin\Debug\net7.0\Model.dll
+F:\GitHub\Task_Excel\Model\bin\Debug\net7.0\Model.pdb
+F:\GitHub\Task_Excel\Model\obj\Debug\net7.0\Model.csproj.AssemblyReference.cache
+F:\GitHub\Task_Excel\Model\obj\Debug\net7.0\Model.GeneratedMSBuildEditorConfig.editorconfig
+F:\GitHub\Task_Excel\Model\obj\Debug\net7.0\Model.AssemblyInfoInputs.cache
+F:\GitHub\Task_Excel\Model\obj\Debug\net7.0\Model.AssemblyInfo.cs
+F:\GitHub\Task_Excel\Model\obj\Debug\net7.0\Model.csproj.CoreCompileInputs.cache
+F:\GitHub\Task_Excel\Model\obj\Debug\net7.0\Model.dll
+F:\GitHub\Task_Excel\Model\obj\Debug\net7.0\refint\Model.dll
+F:\GitHub\Task_Excel\Model\obj\Debug\net7.0\Model.pdb
+F:\GitHub\Task_Excel\Model\obj\Debug\net7.0\ref\Model.dll
